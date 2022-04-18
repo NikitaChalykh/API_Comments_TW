@@ -41,7 +41,7 @@ touch .env
 ```bash 
 echo DB_ENGINE=django.db.backends.postgresql >> .env
 
-echo DB_NAME=postgres l >> .env
+echo DB_NAME=postgres >> .env
 
 echo POSTGRES_PASSWORD=postgres >> .env
 
