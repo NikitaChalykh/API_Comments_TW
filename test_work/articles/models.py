@@ -47,6 +47,12 @@ class Comment(models.Model):
         related_name='comments',
         verbose_name='Статья'
     )
+    nested_level = models.PositiveIntegerField(
+        # знаачение 0 - для комментария под статьей,
+        # больше 0 - вложенные комментарииы
+        default=0,
+        verbose_name='Уровень вложенности комментария'
+    )
 
     class Meta:
         verbose_name = "Комментарий"
@@ -68,9 +74,6 @@ class NestingComment(models.Model):
         on_delete=models.CASCADE,
         related_name='nested_comments',
         verbose_name='Вложенный комментарий'
-    )
-    nested_level = models.PositiveIntegerField(
-        verbose_name='Уровень вложенности комментария'
     )
 
     class Meta:

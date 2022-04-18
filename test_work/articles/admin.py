@@ -18,7 +18,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = (
         'author',
         'article',
-        'text'
+        'text',
+        'nested_level'
     )
     list_filter = ('author', 'article')
     empty_value_display = '-пусто-'
@@ -28,7 +29,6 @@ class NestingCommentAdmin(admin.ModelAdmin):
     list_display = (
         'main_comment',
         'nested_comment',
-        'nested_level'
     )
     list_filter = ('main_comment',)
     empty_value_display = '-пусто-'
