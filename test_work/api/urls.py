@@ -2,7 +2,7 @@ from django.urls import include, path
 from djoser.views import TokenCreateView, TokenDestroyView
 from rest_framework import routers
 
-from .views import (ArticleViewSet, CommentViewSet, UserViewSet)
+from .views import ArticleViewSet, CommentViewSet, UserViewSet
 
 app_name = 'api'
 
