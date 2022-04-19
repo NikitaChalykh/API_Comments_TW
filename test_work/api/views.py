@@ -42,8 +42,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'create' or self.action == 'partial_update':
             return ArticleSerializer
-        if self.action == 'retrieve':
-            return RetrieveArticleSerializer
         return ReadArticleSerializer
     
     def perform_create(self, serializer):
