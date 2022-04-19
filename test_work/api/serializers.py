@@ -65,5 +65,5 @@ class RetrieveArticleSerializer(serializers.ModelSerializer):
      
     def get_comments(self, obj):
         comments = obj.comments.filter(nested_level__regex='0|1|2|3')
-        serializer = CommentSerializer(comments.distinct(), many=True)
+        serializer = CommentSerializer(comments, many=True)
         return serializer.data
