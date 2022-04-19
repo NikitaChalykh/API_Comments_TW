@@ -7,7 +7,8 @@ from articles.models import Article, Comment, User
 
 from .permissions import CustomPermission
 from .serializers import (ArticleSerializer, ReadArticleSerializer,
-                          CommentSerializer, UserSerializer, ReadUserSerializer)
+                          CommentSerializer, UserSerializer,
+                          ReadUserSerializer)
 
 
 class UserViewSet(
@@ -43,7 +44,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         if self.action == 'create' or self.action == 'partial_update':
             return ArticleSerializer
         return ReadArticleSerializer
-    
+
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 

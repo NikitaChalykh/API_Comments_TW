@@ -40,16 +40,16 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = '__all__'   
+        fields = '__all__'
 
 
 class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        exclude  = ('author',)
+        exclude = ('author',)
 
-        
+
 class ReadArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
