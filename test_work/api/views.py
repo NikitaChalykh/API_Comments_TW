@@ -57,7 +57,7 @@ class ArticleCommentViewSet(
     viewsets.GenericViewSet
 ):
     '''list метод выдаст кверисет из всех комментариев к статье
-    вплоть до 3-го уровня вложенности
+    вплоть до 3-го уровня вложенности,
     create метод создает комментарий к статье'''
 
     queryset = Comment.objects.all()
@@ -72,8 +72,7 @@ class ArticleCommentViewSet(
             pk=article_id
         )
         new_queryset = Comment.objects.filter(
-            article=article
-        ).filter(nested_level__regex='0|1|2|3')
+            article=article, nested_level__regex='0|1|2|3')
         return new_queryset
 
     def get_serializer_class(self):
@@ -92,7 +91,7 @@ class ArticleCommentViewSet(
 
 class CommentViewSet(ArticleCommentViewSet):
     '''list метод выдаст кверисет из всех вложенных комментариев
-    для конкретного комментария
+    для конкретного комментария,
     create метод создает комментарий к комментарию'''
 
     def get_queryset(self):

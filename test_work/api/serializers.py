@@ -88,7 +88,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class ReadCommentSerializer(serializers.ModelSerializer):
     main_comment = serializers.SerializerMethodField()
     author = ReadUserSerializer(read_only=True)
-    article = ReadArticleSerializer(read_only=True)
 
     class Meta:
         model = Comment
