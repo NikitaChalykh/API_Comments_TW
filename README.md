@@ -45,11 +45,11 @@ echo DB_NAME=postgres >> .env
 
 echo POSTGRES_PASSWORD=postgres >> .env
 
-echo POSTGRES_USER=postgres  >> .env
+echo POSTGRES_USER=postgres >> .env
 
-echo DB_HOST=db  >> .env
+echo DB_HOST=db >> .env
 
-echo DB_PORT=5432  >> .env
+echo DB_PORT=5432 >> .env
 
 echo SECRET_KEY=************ >> .env
 ```
@@ -59,14 +59,16 @@ echo SECRET_KEY=************ >> .env
 docker-compose up -d
 ```
 
-5. Запуск миграций, создание суперюзера и сбор статики:
+5. Запуск миграций, создание суперюзера, сбор статики и загрузка фикстур:
 ```bash 
 docker-compose exec web python manage.py migrate
 
 docker-compose exec web python manage.py createsuperuser
 
 docker-compose exec web python manage.py collectstatic --no-input 
+
+docker-compose exec backend python manage.py loaddata fixtures.json
 ```
 Документация к проекту
 ----------
-Документация для API после установки доступна по адресу ```/redoc/```.
+Документация для API после установки доступна по адресу ```localhost/redoc/``` и ```localhost/swagger/```.
