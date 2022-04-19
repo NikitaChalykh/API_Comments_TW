@@ -48,8 +48,6 @@ class Comment(models.Model):
         verbose_name='Статья'
     )
     nested_level = models.PositiveIntegerField(
-        # знаачение 0 - для комментария под статьей,
-        # больше 0 - вложенные комментарии
         default=0,
         verbose_name='Уровень вложенности комментария'
     )
