@@ -76,7 +76,7 @@ class ArticleCommentViewSet(
         pass
 
 
-class CommentViewSet(ArticleCommentViewSet, mixins.ListModelMixin):
+class NestedCommentViewSet(ArticleCommentViewSet, mixins.ListModelMixin):
 
     def perform_create(self, serializer):
         # описать тут сохранение вложенного комментария
