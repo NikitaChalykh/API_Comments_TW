@@ -55,17 +55,3 @@ class ReadArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'
-
-        
-class RetrieveArticleSerializer(serializers.ModelSerializer):
-    # нужно тут предусмотреть ссылку на главные комментарии
-    comments = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = Article
-        fields = '__all__'
-     
-    def get_comments(self, obj):
-        comments = obj.comments.filter(nested_level__regex='0|1|2|3')
-        serializer = CommentSerializer(comments, many=True)
-        return serializer.data
