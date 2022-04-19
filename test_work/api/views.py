@@ -54,6 +54,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
 class ArticleCommentViewSet(
     mixins.CreateModelMixin,
+    mixins.DestroyModelMixin,
     viewsets.GenericViewSet
 ):
     queryset = Comment.objects.all()
@@ -61,17 +62,21 @@ class ArticleCommentViewSet(
     pagination_class = None
     permission_classes = (CustomPermission,)
 
-    # def perform_create(self, serializer):
-    #     title_id = self.kwargs.get('title_id')
-    #     title = get_object_or_404(Title, id=title_id)
-    #     review_id = self.kwargs.get('review_id')
-    #     review = get_object_or_404(Review, id=review_id, title=title)
-    #     serializer.save(author=self.request.user, review=review)
+    def perform_create(self, serializer):
+        # описать тут сохранение комментария к статье
+        pass
+
+    def perform_destroy(self, serializer):
+        # описать тут удаления комментария к статье и еще всех вложенных
+        pass
 
 
-class CommentViewSet(
-    ArticleCommentViewSet,
-    mixins.RetrieveModelMixin,
-    mixins.DestroyModelMixin
-):
-    pass
+class CommentViewSet(ArticleCommentViewSet, mixins.ListModelMixin):
+
+    def perform_create(self, serializer):
+        # описать тут сохранение вложенного комментария
+        pass
+
+    def perform_destroy(self, serializer):
+        # описать тут удаления вложенного комментария и еще всех вложенных
+        pass

@@ -16,7 +16,7 @@ router_api.register(
     basename='article_comments'
 )
 router_api.register(
-    r'^comments/(?P<comment_id>\d+)/nested_comments',
+    r'^articles/(?P<article_id>\d+)/comments/(?P<comment_id>\d+)/nested',
     CommentViewSet,
     basename='nested_comments'
 )

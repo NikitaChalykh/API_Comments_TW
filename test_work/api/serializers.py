@@ -43,6 +43,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    nested_level = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Comment
-        exclude = ('nested_level',)
+        fields = '__all__'
