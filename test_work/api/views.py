@@ -44,7 +44,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
             return ArticleSerializer
         if self.action == 'retrieve':
             return RetrieveArticleSerializer
-        return ReadUserSerializer
+        return ReadArticleSerializer
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
