@@ -3,7 +3,7 @@ from djoser.views import TokenCreateView, TokenDestroyView
 from rest_framework import routers
 
 from .views import (ArticleViewSet, ArticleCommentViewSet,
-                    CommentViewSet, UserViewSet)
+                    NestedCommentViewSet, UserViewSet)
 
 app_name = 'api'
 
@@ -17,7 +17,7 @@ router_api.register(
 )
 router_api.register(
     r'^articles/(?P<article_id>\d+)/comments/(?P<comment_id>\d+)/nested',
-    CommentViewSet,
+    NestedCommentViewSet,
     basename='nested_comments'
 )
 router_api.register('users', UserViewSet)
