@@ -60,7 +60,7 @@ class Comment(models.Model):
         return self.text[:15]
 
 
-class NestingComment(models.Model):
+class NestedComment(models.Model):
     main_comment = models.ForeignKey(
         Comment,
         on_delete=models.CASCADE,
