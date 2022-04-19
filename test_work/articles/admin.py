@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Comment, NestingComment
+from .models import Article, Comment, NestedComment
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -25,7 +25,7 @@ class CommentAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-class NestingCommentAdmin(admin.ModelAdmin):
+class NestedCommentAdmin(admin.ModelAdmin):
     list_display = (
         'main_comment',
         'nested_comment',
@@ -36,4 +36,4 @@ class NestingCommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(NestingComment, NestingCommentAdmin)
+admin.site.register(NestedComment, NestedCommentAdmin)
