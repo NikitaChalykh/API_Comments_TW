@@ -15,7 +15,7 @@ class UserViewSet(
     viewsets.GenericViewSet
 ):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = ReadUserSerializer
     pagination_class = None
 
     @action(
@@ -35,10 +35,15 @@ class UserViewSet(
 
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+    serializer_class = ReadArticleSerializer
     pagination_class = PageNumberPagination
     permission_classes = (CustomPermission,)
 
+    def get_serializer_class(self):
+        if self.action == 'create' or self.action == 'partial_update':
+            return ArticleSerializer
+        return ReadUserSerializer
+    
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
