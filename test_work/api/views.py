@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from articles.models import Article, Comment, User
 
 from .permissions import CustomPermission
-from .serializers import (ArticleSerializer, ReadArticleSerializer, RetrieveArticleSerializer,
-                          CommentSerializer, UserSerializer, ReadUserSerializer,  )
+from .serializers import (ArticleSerializer, ReadArticleSerializer,
+                          CommentSerializer, UserSerializer, ReadUserSerializer)
 
 
 class UserViewSet(
