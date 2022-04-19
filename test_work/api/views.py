@@ -30,7 +30,7 @@ class UserViewSet(
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_serializer_class(self):
-        if self.action == 'create' or self.action == 'partial_update':
+        if self.action == 'create':
             return UserSerializer
         return ReadUserSerializer
 
@@ -42,7 +42,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = (CustomPermission,)
 
     def get_serializer_class(self):
-        if self.action == 'create' or self.action == 'partial_update':
+        if self.action == 'create':
             return ArticleSerializer
         return ReadArticleSerializer
 
