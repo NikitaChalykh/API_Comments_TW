@@ -2,8 +2,7 @@ from django.urls import include, path
 from djoser.views import TokenCreateView, TokenDestroyView
 from rest_framework import routers
 
-from .views import (ArticleViewSet, ArticleCommentViewSet,
-                    NestedCommentViewSet, UserViewSet)
+from .views import (ArticleViewSet, CommentViewSet, UserViewSet)
 
 app_name = 'api'
 
@@ -12,12 +11,12 @@ router_api = routers.DefaultRouter()
 router_api.register('articles', ArticleViewSet)
 router_api.register(
     r'^articles/(?P<article_id>\d+)/comments',
-    ArticleCommentViewSet,
+    CommentViewSet,
     basename='article_comments'
 )
 router_api.register(
     r'^articles/(?P<article_id>\d+)/comments/(?P<comment_id>\d+)/nested',
-    NestedCommentViewSet,
+    CommentViewSet,
     basename='nested_comments'
 )
 router_api.register('users', UserViewSet)
