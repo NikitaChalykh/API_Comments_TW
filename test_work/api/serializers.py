@@ -34,6 +34,14 @@ class ReadUserSerializer(serializers.ModelSerializer):
         )
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    nested_level = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = '__all__'   
+
+
 class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -47,10 +55,15 @@ class ReadArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = '__all__'
 
-
-class CommentSerializer(serializers.ModelSerializer):
-    nested_level = serializers.IntegerField(read_only=True)
-
+        
+class RetrieveArticleSerializer(serializers.ModelSerializer):
+    comments = serializers.SerializerMethodField()
+    
     class Meta:
-        model = Comment
+        model = Article
         fields = '__all__'
+     
+    def get_comments(self, obj):
+        comments = obj.comments.filter(nested_level__regex='0|1|2|3')
+        serializer = CommentSerializer(comments.distinct(), many=True)
+        return serializer.data
