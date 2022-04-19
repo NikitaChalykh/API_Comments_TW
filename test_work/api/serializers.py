@@ -35,7 +35,13 @@ class ReadUserSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    author = ReadUserSerializer(read_only=True)
+
+    class Meta:
+        model = Article
+        exclude  = ('author',)
+
+        
+class ReadArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
