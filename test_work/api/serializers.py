@@ -35,6 +35,7 @@ class ReadUserSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    # нужно тут предусмотреть ссылку на главные комментарии
     nested_level = serializers.IntegerField(read_only=True)
 
     class Meta:
@@ -57,6 +58,7 @@ class ReadArticleSerializer(serializers.ModelSerializer):
 
         
 class RetrieveArticleSerializer(serializers.ModelSerializer):
+    # нужно тут предусмотреть ссылку на главные комментарии
     comments = serializers.SerializerMethodField()
     
     class Meta:
