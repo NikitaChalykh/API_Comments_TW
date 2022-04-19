@@ -48,6 +48,9 @@ class Comment(models.Model):
         verbose_name='Статья'
     )
     nested_level = models.PositiveIntegerField(
+        # 0 - комментарий относится к статье
+        # 1,2,3 и т.д. - уровень вложенности для комментария
+        # к комментарию
         default=0,
         verbose_name='Уровень вложенности комментария'
     )
@@ -57,10 +60,11 @@ class Comment(models.Model):
         verbose_name_plural = "Комментарии"
 
     def __str__(self):
-        return self.text[:15]
+        return self.text
 
 
 class NestedComment(models.Model):
+    '''Модель для записей взаимосвязей вложенных комментариев'''
     main_comment = models.ForeignKey(
         Comment,
         on_delete=models.CASCADE,
@@ -85,4 +89,4 @@ class NestedComment(models.Model):
         ]
 
     def __str__(self):
-        return self.main_comment.text[:15]
+        return self.main_comment.text

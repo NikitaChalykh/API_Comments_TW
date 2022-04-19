@@ -26,7 +26,8 @@ class UserViewSet(
         permission_classes=(permissions.IsAuthenticated,)
     )
     def me(self, request):
-        serializer = UserSerializer(request.user)
+        '''Метод для отображения фронтендом пользователя'''
+        serializer = ReadUserSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_serializer_class(self):
@@ -52,8 +53,13 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
 class ArticleCommentViewSet(
     mixins.CreateModelMixin,
+    mixins.ListModelMixin,
     viewsets.GenericViewSet
 ):
+    '''list метод выдаст кверисет из всех комментариев к статье
+    вплоть до 3-го уровня вложенности
+    create метод создает комментарий к статье'''
+
     queryset = Comment.objects.all()
     serializer_class = ReadCommentSerializer
     pagination_class = None
@@ -85,9 +91,12 @@ class ArticleCommentViewSet(
 
 
 class CommentViewSet(ArticleCommentViewSet):
+    '''list метод выдаст кверисет из всех вложенных комментариев
+    для конкретного комментария
+    create метод создает комментарий к комментарию'''
 
     def get_queryset(self):
-        comment_id = self.kwargs.get("comment_id")
+        comment_id = self.kwargs.get('comment_id')
         main_comment = get_object_or_404(
             Comment,
             pk=comment_id
