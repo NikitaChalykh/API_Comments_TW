@@ -77,6 +77,12 @@ class NestedComment(models.Model):
     class Meta:
         verbose_name = "Вложенные комментарий"
         verbose_name_plural = "Вложенные комментарии"
+        constraints = [
+            models.UniqueConstraint(
+                fields=['main_comment', 'nested_comment'],
+                name='unique_nested_comment'
+            )
+        ]
 
     def __str__(self):
         return self.main_comment.text[:15]
