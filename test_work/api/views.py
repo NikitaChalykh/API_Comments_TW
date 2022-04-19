@@ -50,7 +50,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class ArticleCommentViewSet(
+class CommentViewSet(
     mixins.CreateModelMixin,
     mixins.DestroyModelMixin,
     viewsets.GenericViewSet
@@ -66,15 +66,4 @@ class ArticleCommentViewSet(
 
     def perform_destroy(self, serializer):
         # описать тут удаления комментария к статье и еще всех вложенных
-        pass
-
-
-class NestedCommentViewSet(ArticleCommentViewSet, mixins.ListModelMixin):
-
-    def perform_create(self, serializer):
-        # описать тут сохранение вложенного комментария
-        pass
-
-    def perform_destroy(self, serializer):
-        # описать тут удаления вложенного комментария и еще всех вложенных
         pass
