@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from articles.models import Article, Comment, User
 
 from .permissions import CustomPermission
-from .serializers import (ArticleSerializer, CommentSerializer,
-                          UserSerializer, ReadUserSerializer)
+from .serializers import (ArticleSerializer, ReadArticleSerializer, 
+                          CommentSerializer, UserSerializer, ReadUserSerializer,  )
 
 
 class UserViewSet(
@@ -42,19 +42,12 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'create' or self.action == 'partial_update':
             return ArticleSerializer
+        if self.action == 'retrieve':
+            return RetrieveArticleSerializer
         return ReadUserSerializer
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-
-    @action(
-        detail=False,
-        methods=['GET']
-    )
-    def show_comments(self, request):
-        # тут будет код для показа комментов стаитья до 3 уровня
-        # вложенности
-        pass
 
 
 class ArticleCommentViewSet(
