@@ -71,7 +71,7 @@ docker-compose exec web python manage.py createsuperuser
 
 docker-compose exec web python manage.py collectstatic --no-input 
 
-docker-compose exec backend python manage.py loaddata fixtures.json
+docker-compose exec web python manage.py loaddata fixtures.json
 ```
 Документация к проекту
 ----------
