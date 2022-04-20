@@ -75,4 +75,4 @@ docker-compose exec backend python manage.py loaddata fixtures.json
 ```
 Документация к проекту
 ----------
-Документация для API после установки доступна по адресу ```localhost/redoc/``` и ```localhost/swagger/```.
+Документация для API после установки доступна по адресу ```localhost/redoc/```.
