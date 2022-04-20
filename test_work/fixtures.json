@@ -1,49 +1,5 @@
 [
    {
-      "model":"auth.user",
-      "pk":1,
-      "fields":{
-         "password":"pbkdf2_sha256$216000$aUELyB6Rj5H5$XnKIzWQQVWS6mjoe2JvxtR2suhmyhTGj/fwFXYYdwVY=",
-         "last_login":"2022-04-18T22:25:03Z",
-         "is_superuser":true,
-         "username":"admin",
-         "first_name":"Админ",
-         "last_name":"Всемогущий",
-         "email":"admin@admin.ru",
-         "is_staff":true,
-         "is_active":true,
-         "date_joined":"2022-04-18T22:24:55Z",
-         "groups":[
-            
-         ],
-         "user_permissions":[
-            
-         ]
-      }
-   },
-   {
-      "model":"auth.user",
-      "pk":2,
-      "fields":{
-         "password":"pbkdf2_sha256$216000$F7cmWPI11nbx$S5G3mSwdzdFQirCHPMA0CdwFxVzoGfbS64Rx5QhSTfc=",
-         "last_login":"2022-04-19T16:10:19Z",
-         "is_superuser":false,
-         "username":"Niko",
-         "first_name":"Никита",
-         "last_name":"Чалых",
-         "email":"Wizardus@list.ru.com",
-         "is_staff":false,
-         "is_active":true,
-         "date_joined":"2022-04-19T16:08:17Z",
-         "groups":[
-            
-         ],
-         "user_permissions":[
-            
-         ]
-      }
-   },
-   {
       "model":"articles.article",
       "pk":2,
       "fields":{
