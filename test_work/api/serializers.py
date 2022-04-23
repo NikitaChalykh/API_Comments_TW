@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
-from articles.models import Article, Comment, NestedComment, User
+from articles.models import Article, Comment, User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -61,13 +61,12 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        exclude = ('nested_level', 'author', 'article')
+        exclude = ('nested_level', 'author', 'article', 'main_comment')
 
     def create(self, validated_data):
         '''Если сериалайзер вызывается из CommentViewSet,
-        то, ко всему прочему, будет создана новая запись
-        в модели вложенных комментариев,
-        новый комментарий также получит данные о вложенности
+        то, ко всему прочему, новый комментарий
+        также получит данные о вложенности
         для корректного построения дерева комментариев'''
         new_comment = Comment.objects.create(**validated_data)
         main_comment_id = self.context.get('view').kwargs.get('comment_id')
@@ -76,36 +75,15 @@ class CommentSerializer(serializers.ModelSerializer):
                 Comment,
                 pk=main_comment_id
             )
-            NestedComment.objects.create(
-                main_comment=main_comment,
-                nested_comment=new_comment
-            )
             new_comment.nested_level = main_comment.nested_level + 1
+            new_comment.main_comment = main_comment_id
             new_comment.save()
         return new_comment
 
 
 class ReadCommentSerializer(serializers.ModelSerializer):
-    main_comment = serializers.SerializerMethodField()
     author = ReadUserSerializer(read_only=True)
 
     class Meta:
         model = Comment
-        fields = (
-            'pk',
-            'text',
-            'author',
-            'article',
-            'nested_level',
-            'main_comment'
-        )
-
-    def get_main_comment(self, obj):
-        '''Необходимое поле для фронтенда для
-        построения корректного дерева комментариев -
-        данные о вложенности комментария'''
-        if NestedComment.objects.filter(nested_comment=obj).exists():
-            return NestedComment.objects.get(
-                nested_comment=obj
-            ).main_comment.pk
-        return None
+        fields = '__all__'

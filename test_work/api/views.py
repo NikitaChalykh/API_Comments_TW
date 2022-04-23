@@ -26,7 +26,6 @@ class UserViewSet(
         permission_classes=(permissions.IsAuthenticated,)
     )
     def me(self, request):
-        '''Метод для отображения фронтендом пользователя'''
         serializer = ReadUserSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -37,7 +36,7 @@ class UserViewSet(
 
 
 class ArticleViewSet(viewsets.ModelViewSet):
-    queryset = Article.objects.all()
+    queryset = Article.objects.select_related('author').all()
     serializer_class = ReadArticleSerializer
     pagination_class = PageNumberPagination
     permission_classes = (CustomPermission,)
@@ -60,7 +59,7 @@ class ArticleCommentViewSet(
     вплоть до 3-го уровня вложенности,
     create метод создает комментарий к статье'''
 
-    queryset = Comment.objects.all()
+    queryset = Comment.objects.select_related('author', 'article').all()
     serializer_class = ReadCommentSerializer
     pagination_class = None
     permission_classes = (CustomPermission,)
@@ -71,8 +70,10 @@ class ArticleCommentViewSet(
             Article,
             pk=article_id
         )
-        new_queryset = Comment.objects.filter(
-            article=article, nested_level__regex='0|1|2|3')
+        new_queryset = self.queryset.filter(
+            article=article,
+            nested_level__regex='0|1|2|3'
+        )
         return new_queryset
 
     def get_serializer_class(self):
@@ -96,11 +97,20 @@ class CommentViewSet(ArticleCommentViewSet):
 
     def get_queryset(self):
         comment_id = self.kwargs.get('comment_id')
-        main_comment = get_object_or_404(
-            Comment,
-            pk=comment_id
-        )
-        new_queryset = Comment.objects.filter(
-            nested_comments__main_comment=main_comment
+        new_queryset = self.queryset.filter(
+            main_comment=comment_id
         )
         return new_queryset
+
+    def perform_create(self, serializer):
+        article_id = self.kwargs.get("article_id")
+        comment_id = self.kwargs.get('comment_id')
+        article = get_object_or_404(
+            Article,
+            pk=article_id
+        )
+        serializer.save(
+            article=article,
+            author=self.request.user,
+            main_comment=comment_id
+        )
