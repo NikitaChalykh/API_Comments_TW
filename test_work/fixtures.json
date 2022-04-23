@@ -1065,6 +1065,7 @@
 		"text": "Да при таких ценах бросать надо!",
 		"author": 2,
 		"article": 2,
+		"main_comment": None,
 		"nested_level": 0
 	}
 }, {
@@ -1074,6 +1075,7 @@
 		"text": "И вообще, если бы я бросил курить, купил бы себе новый айфон!!",
 		"author": 2,
 		"article": 2,
+		"main_comment": None,
 		"nested_level": 0
 	}
 }, {
