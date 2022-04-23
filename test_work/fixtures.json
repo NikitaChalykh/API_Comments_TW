@@ -1083,6 +1083,7 @@
 		"text": "Не, не купил бы, дорого очень",
 		"author": 2,
 		"article": 2,
+		"main_comment": 26,
 		"nested_level": 1
 	}
 }, {
@@ -1092,6 +1093,7 @@
 		"text": "Займусь ка я бегом",
 		"author": 2,
 		"article": 2,
+		"main_comment": 27,
 		"nested_level": 2
 	}
 }, {
@@ -1101,6 +1103,7 @@
 		"text": "От бега, вообще-то, портятся суставы",
 		"author": 2,
 		"article": 2,
+		"main_comment": 27,
 		"nested_level": 2
 	}
 }, {
@@ -1110,6 +1113,7 @@
 		"text": "Тогда займусь спортивной хотьбой",
 		"author": 2,
 		"article": 2,
+		"main_comment": 29,
 		"nested_level": 3
 	}
 }, {
@@ -1119,42 +1123,8 @@
 		"text": "Или просто посижу дома",
 		"author": 2,
 		"article": 2,
-		"nested_level": 4
-	}
-}, {
-	"model": "articles.nestedcomment",
-	"pk": 11,
-	"fields": {
-		"main_comment": 26,
-		"nested_comment": 27
-	}
-}, {
-	"model": "articles.nestedcomment",
-	"pk": 12,
-	"fields": {
-		"main_comment": 27,
-		"nested_comment": 28
-	}
-}, {
-	"model": "articles.nestedcomment",
-	"pk": 13,
-	"fields": {
-		"main_comment": 27,
-		"nested_comment": 29
-	}
-}, {
-	"model": "articles.nestedcomment",
-	"pk": 14,
-	"fields": {
-		"main_comment": 29,
-		"nested_comment": 30
-	}
-}, {
-	"model": "articles.nestedcomment",
-	"pk": 15,
-	"fields": {
 		"main_comment": 30,
-		"nested_comment": 31
+		"nested_level": 4
 	}
 }, {
 	"model": "authtoken.token",
