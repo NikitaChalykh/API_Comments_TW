@@ -9,9 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', default='0iqlc$-+^1^v37e@@q$q#$=rte4-$9@xlkm#yj%^bd8mb$oo4g')
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 INSTALLED_APPS = [

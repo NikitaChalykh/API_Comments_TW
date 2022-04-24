@@ -59,7 +59,10 @@ class ArticleCommentViewSet(
     вплоть до 3-го уровня вложенности,
     create метод создает комментарий к статье'''
 
-    queryset = Comment.objects.select_related('author', 'article').all()
+    queryset = Comment.objects.select_related(
+        'author',
+        'article__author'
+    ).all()
     serializer_class = ReadCommentSerializer
     pagination_class = None
     permission_classes = (CustomPermission,)
