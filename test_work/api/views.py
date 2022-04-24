@@ -61,6 +61,7 @@ class ArticleCommentViewSet(
 
     queryset = Comment.objects.select_related(
         'author',
+        'article',
         'article__author'
     ).all()
     serializer_class = ReadCommentSerializer
