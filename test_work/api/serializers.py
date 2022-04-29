@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
+from rest_framework_recursive.fields import RecursiveField
 
 from articles.models import Article, Comment, User
 
@@ -63,26 +63,12 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         exclude = ('nested_level', 'author', 'article', 'main_comment')
 
-    def create(self, validated_data):
-        '''Если сериалайзер вызывается из CommentViewSet,
-        то, ко всему прочему, новый комментарий
-        также получит данные о вложенности
-        для корректного построения дерева комментариев'''
-        new_comment = Comment.objects.create(**validated_data)
-        main_comment_id = self.context.get('view').kwargs.get('comment_id')
-        if main_comment_id is not None:
-            main_comment = get_object_or_404(
-                Comment,
-                pk=main_comment_id
-            )
-            new_comment.nested_level = main_comment.nested_level + 1
-            new_comment.main_comment = main_comment_id
-            new_comment.save()
-        return new_comment
-
 
 class ReadCommentSerializer(serializers.ModelSerializer):
     author = ReadUserSerializer(read_only=True)
+    nested_comments = RecursiveField(
+        required=False, many=True, allow_null=True
+    )
 
     class Meta:
         model = Comment

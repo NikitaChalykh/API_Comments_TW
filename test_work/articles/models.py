@@ -47,8 +47,11 @@ class Comment(models.Model):
         related_name='comments',
         verbose_name='Статья'
     )
-    main_comment = models.PositiveIntegerField(
+    main_comment = models.ForeignKey(
+        'self',
         null=True,
+        on_delete=models.CASCADE,
+        related_name='nested_comments',
         verbose_name='Основной комментарий'
     )
     nested_level = models.PositiveIntegerField(

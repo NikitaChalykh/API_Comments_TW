@@ -76,7 +76,7 @@ class ArticleCommentViewSet(
         )
         new_queryset = self.queryset.filter(
             article=article,
-            nested_level__regex='0|1|2|3'
+            nested_level=0
         )
         return new_queryset
 
@@ -91,7 +91,10 @@ class ArticleCommentViewSet(
             Article,
             pk=article_id
         )
-        serializer.save(article=article, author=self.request.user)
+        serializer.save(
+            article=article,
+            author=self.request.user
+        )
 
 
 class CommentViewSet(ArticleCommentViewSet):
@@ -109,6 +112,11 @@ class CommentViewSet(ArticleCommentViewSet):
     def perform_create(self, serializer):
         article_id = self.kwargs.get("article_id")
         comment_id = self.kwargs.get('comment_id')
+        main_comment = get_object_or_404(
+            Comment,
+            pk=comment_id
+        )
+        new_nested_level = main_comment.nested_level + 1
         article = get_object_or_404(
             Article,
             pk=article_id
@@ -116,5 +124,6 @@ class CommentViewSet(ArticleCommentViewSet):
         serializer.save(
             article=article,
             author=self.request.user,
-            main_comment=comment_id
+            main_comment=main_comment,
+            nested_level=new_nested_level
         )
