@@ -15,7 +15,7 @@
 ----------
 Проект разворачивается в трех Docker контейнерах: web-приложение, postgresql-база данных и nginx-сервер.
 
-В проекте реализована аутентификация на базе токенов, настроена админка, реализовано тестирование основных моделей и url проекта.
+В проекте реализована аутентификация на базе токенов, настроена админка.
 
 Настроены пермишены для эндпоинтов и пагинация для эндпоинта со статьями. 
 
@@ -73,15 +73,13 @@ echo DB_PORT=5432 >> .env
 docker-compose up -d
 ```
 
-5. Запуск миграций, сбор статики, загрузка фикстур и запуск тестов:
+5. Запуск миграций, сбор статики и загрузка фикстур:
 ```bash 
 docker-compose exec web python manage.py migrate
 
 docker-compose exec web python manage.py collectstatic --no-input 
 
 docker-compose exec web python manage.py loaddata fixtures.json
-
-docker-compose exec web python manage.py test
 ```
 Документация к проекту
 ----------
