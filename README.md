@@ -41,7 +41,7 @@
 ----------
 1. Клонировать репозиторий и перейти в него в командной строке:
 ```bash 
-git clone 'https://github.com/NikitaChalykh/test_work.git'
+git clone git@github.com:NikitaChalykh/API_Comments_TW.git
 
 cd test_work
 ```
