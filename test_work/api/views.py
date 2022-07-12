@@ -56,7 +56,7 @@ class ArticleCommentViewSet(
     viewsets.GenericViewSet
 ):
     '''list метод выдаст кверисет из всех комментариев к статье
-    вплоть до 3-го уровня вложенности,
+    (включая все вложенные),
     create метод создает комментарий к статье'''
 
     queryset = Comment.objects.select_related(
