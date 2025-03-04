@@ -42,7 +42,7 @@ MIDDLEWARE = [
 ]
 
 
-ROOT_URLCONF = 'test_work.urls'
+ROOT_URLCONF = 'backend.urls'
 
 
 TEMPLATES = [
@@ -61,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'test_work.wsgi.application'
+WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 DATABASES = {

@@ -45,7 +45,7 @@ REST API для системы комментариев блога
 ```bash 
 git clone git@github.com:NikitaChalykh/API_Comments_TW.git
 
-cd test_work
+cd backend
 ```
 
 2. Cоздать и открыть файл ```.env``` с переменными окружения:
